@@ -185,6 +185,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="sass-stdlib" level="application" />
+    <orderEntry type="library" name="aidph node_modules" level="project" />
   </component>
 </module>
 
