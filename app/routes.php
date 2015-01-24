@@ -14,5 +14,9 @@
 Route::get('/', function()
 {
 	return View::make('hello');
-//    return 'hello world';
 });
+
+
+Route::get('/areas', 'AreasController@index');
+
+Route::get('/areas/{id}', 'AreasController@find');
