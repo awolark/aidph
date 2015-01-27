@@ -42,6 +42,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/global-state" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/recursion-context" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sorskod/larasponse" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/stack/builder" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/browser-kit" />
@@ -66,8 +67,8 @@
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/vendor/sebastian/exporter" />
           <root url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
+          <root url="file://$MODULE_DIR$/vendor/sebastian/exporter" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
           <root url="file://$MODULE_DIR$/vendor/guzzlehttp/guzzle" />
           <root url="file://$MODULE_DIR$/vendor/laracasts/commander" />
@@ -118,6 +119,7 @@
           <root url="file://$MODULE_DIR$/vendor/sebastian/environment" />
           <root url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
           <root url="file://$MODULE_DIR$/vendor/symfony/yaml" />
+          <root url="file://$MODULE_DIR$/vendor/sorskod/larasponse" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/diff" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
           <root url="file://$MODULE_DIR$/vendor/league/fractal" />
@@ -126,8 +128,8 @@
           <root url="file://$MODULE_DIR$/vendor/stack/builder" />
         </CLASSES>
         <SOURCES>
-          <root url="file://$MODULE_DIR$/vendor/sebastian/exporter" />
           <root url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
+          <root url="file://$MODULE_DIR$/vendor/sebastian/exporter" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
           <root url="file://$MODULE_DIR$/vendor/guzzlehttp/guzzle" />
           <root url="file://$MODULE_DIR$/vendor/laracasts/commander" />
@@ -178,6 +180,7 @@
           <root url="file://$MODULE_DIR$/vendor/sebastian/environment" />
           <root url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
           <root url="file://$MODULE_DIR$/vendor/symfony/yaml" />
+          <root url="file://$MODULE_DIR$/vendor/sorskod/larasponse" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/diff" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
           <root url="file://$MODULE_DIR$/vendor/league/fractal" />

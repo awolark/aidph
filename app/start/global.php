@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 ClassLoader::addDirectories(array(
 
 	app_path().'/commands',
@@ -51,6 +53,11 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
+App::error(function(ModelNotFoundException $modelNotFoundException)
+{
+    Log::error($modelNotFoundException);
+    return Response::json(['error' => ['message' => 'Resource not found']], 404);
+});
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler

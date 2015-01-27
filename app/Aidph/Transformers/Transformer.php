@@ -1,0 +1,19 @@
+<?php namespace Aidph\Transformers;
+
+
+abstract class Transformer {
+
+    /**
+     * Tranform a collection of items
+     *
+     * @param $items
+     * @return array
+     */
+    public function transformCollection(array $items)
+    {
+        return array_map([$this, 'transform'], $items);
+    }
+
+    public abstract function  transform($item);
+
+} 

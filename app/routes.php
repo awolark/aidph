@@ -13,10 +13,15 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+    return View::make('hello');
+});
+
+Route::group(['prefix' => 'api'], function(){
+
+    Route::resource('areas', 'AreasController');
+    Route::resource('infras', 'InfrastructuresController');
+    Route::get('areas/{id}/infras', 'InfrastructuresController@infras');
+
 });
 
 
-Route::get('/areas', 'AreasController@index');
-
-Route::get('/areas/{id}', 'AreasController@find');

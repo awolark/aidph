@@ -2,6 +2,11 @@
 
 class DatabaseSeeder extends Seeder {
 
+    private $tables = [
+        'areas',
+        'users',
+        'infrastructures'
+    ];
 	/**
 	 * Run the database seeds.
 	 *
@@ -9,11 +14,32 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
+        $this->cleanDatabase();
+
 		Eloquent::unguard();
 
-//        Area::truncate();
+        $this->seedTables();
 
-		$this->call('AreaTableSeeder');
 	}
+
+    private function seedTables(){
+        foreach($this->tables as $tableName){
+            $tableSeeder = ucfirst($tableName) . 'TableSeeder';
+            $this->call($tableSeeder);
+        }
+    }
+
+    private function cleanDatabase()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        foreach($this->tables as $tableName)
+        {
+            DB::table($tableName)->truncate();
+        }
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+    }
 
 }
