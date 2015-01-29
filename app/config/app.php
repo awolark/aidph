@@ -1,5 +1,6 @@
 <?php
 
+
 return array(
 
 	/*
@@ -124,7 +125,8 @@ return array(
         'Way\Generators\GeneratorsServiceProvider',
         'Laracasts\Commander\CommanderServiceProvider',
         'Sorskod\Larasponse\LarasponseServiceProvider',
-        'Laracasts\Commander\CommanderServiceProvider'
+        'Laracasts\Commander\CommanderServiceProvider',
+        'Barryvdh\Cors\CorsServiceProvider',
 	),
 
 	/*

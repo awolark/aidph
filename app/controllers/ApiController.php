@@ -21,6 +21,8 @@ class ApiController extends \BaseController {
     function __construct(Larasponse $fractal)
     {
         $this->fractal = $fractal;
+
+        $this->afterFilter('access-control');
     }
 
     /**
@@ -67,7 +69,7 @@ class ApiController extends \BaseController {
      */
     public function respond($data, array $headers = [])
     {
-        return Response::json($data, $this->getStatusCode(), $headers);
+         return Response::json($data, $this->getStatusCode(), $headers);
     }
 
     public function respondWithPagination(Paginator $items, $transformer)
@@ -113,6 +115,13 @@ class ApiController extends \BaseController {
     {
         return $this->setStatusCode(IlluminateResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->respondWithError($message);
+    }
+
+    public function respondAuthenticationFailed()
+    {
+        $errorMessage = Lang::get(Lang::get('validation.attributes.login_failed'));
+
+        return $this->respondInternalError($errorMessage);
     }
 
 

@@ -48,7 +48,13 @@ Route::filter('auth', function()
 
 Route::filter('auth.basic', function()
 {
-	return Auth::basic();
+//	default: return Auth::basic();
+    return Auth::basic('username');
+});
+
+//for api stateless http basic filter
+Route::filter('basic.once', function(){
+    return Auth::onceBasic('username');
 });
 
 /*
@@ -84,4 +90,13 @@ Route::filter('csrf', function()
 	{
 		throw new Illuminate\Session\TokenMismatchException;
 	}
+});
+
+/*
+ *Filter for CORS
+ *
+ */
+Route::filter('access-control', function($route, $request, $response)
+{
+    $response->headers->set('Access-Control-Allow-Origin', '*');
 });

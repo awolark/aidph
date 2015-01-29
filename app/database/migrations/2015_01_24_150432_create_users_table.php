@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration {
             $table->tinyInteger('role');
             $table->string('gcm_regid', 100)->nullable();
             $table->string('image_path', 255)->nullable();
+            $table->string('remember_token', 100)->nullable();
             $table->char('recstat', 1)->default('A');
             $table->timestamps();
 

@@ -101,6 +101,9 @@ return array(
 	|
 	*/
 
-	'attributes' => array(),
+	'attributes' => array
+    (
+        'login_failed' => 'Invalid Username or Password'
+    ),
 
 );
