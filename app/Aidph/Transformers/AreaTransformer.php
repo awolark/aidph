@@ -12,6 +12,7 @@ class AreaTransformer extends TransformerAbstract {
     public function transform(Area $area)
     {
         return [
+            'id' => $area['id'],
             'area_name' => $area['name'],
             'area_type' => $area['type'],
             'contact_person' => $area['contact_person'],

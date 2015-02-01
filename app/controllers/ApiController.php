@@ -121,7 +121,13 @@ class ApiController extends \BaseController {
     {
         $errorMessage = Lang::get(Lang::get('validation.attributes.login_failed'));
 
-        return $this->respondInternalError($errorMessage);
+        return $this->respondUserUnauthorized($errorMessage);
+    }
+
+    public function respondUserUnauthorized($errorMessage = '')
+    {
+        return $this->setStatusCode(IlluminateResponse::HTTP_UNAUTHORIZED)
+                ->respondWithError($errorMessage);
     }
 
 

@@ -15,10 +15,17 @@ class SessionsController extends ApiController {
 	 */
 	public function store()
 	{
-
-        if(Auth::attempt(array('username' => Input::json('username'), 'password' => Input::json('password'))))
+        if(Auth::once(array('username' => Input::json('username'), 'password' => Input::json('password'))))
         {
-            return $this->respond(Auth::user());
+            $user = Auth::user();
+            $data = array(
+                'data' =>
+                    array('username' => $user->username,
+                          'role' => $user->role,
+                          'image_path' => $user->image_path
+                    )
+            );
+            return $this->respond($data);
         } else {
             return $this->respondAuthenticationFailed();
         }
@@ -35,4 +42,23 @@ class SessionsController extends ApiController {
         Auth::logout();
         return $this->respond(array('flash' => 'Logged Out!'));
     }
+
+    public function unlock()
+    {
+        if(Auth::once(array('username' => Input::json('username'), 'password' => Input::json('password'))))
+        {
+            return $this->respond(array('flash' => 'Unlocked'));
+        } else {
+            return $this->respondValidationFailed('Invalid Password');
+        }
+    }
+
+//    public function check()
+//    {
+//        if(Auth::check())
+//        {
+//            return $this->respond(array('flash' => 'User is Still Logged In'));
+//        }
+//        return $this->respondAuthenticationExpired();
+//    }
 }

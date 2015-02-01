@@ -16,19 +16,9 @@ Route::get('/', function()
     return View::make('hello');
 });
 
-//Route::get('login', function(){
-//        echo (Auth::attempt(array('username' => 'admin', 'password' => '1234'))
-//            ) ? 'success login' : 'failed login' ;
-//});
-//
-//Route::get('logout', function(){
-//    Auth::logout();
-//});
-//
-//Route::get('getuser', function(){
-//   dd(Auth::user());
-//});
-
+Route::get('/expiry', function(){
+   Response::json(array('flash' => 'Expired!'), 401);
+});
 /*
  * Register User
  */
@@ -43,7 +33,9 @@ Route::get('/register/verify/{confirmation_code}', 'RegistrationController@verif
  * Sessions
  */
 Route::post('auth/login', 'SessionsController@store');
-Route::get('auth/logout', 'SessionsController@destroy');
+Route::delete('auth/logout', 'SessionsController@destroy');
+Route::get('auth/unlock', 'SessionsController@unlock');
+//Route::get('auth/check', 'SessionsController@check');
 
 /*
  * Resource Data
@@ -51,4 +43,19 @@ Route::get('auth/logout', 'SessionsController@destroy');
 Route::resource('/areas', 'AreasController');
 Route::resource('/infras', 'InfrastructuresController');
 Route::get('/areas/{id}/infras', 'InfrastructuresController@infras');
+
+
+
+//Route::get('login', function(){
+//        echo (Auth::attempt(array('username' => 'admin', 'password' => '1234'))
+//            ) ? 'success login' : 'failed login' ;
+//});
+//
+//Route::get('logout', function(){
+//    Auth::logout();
+//});
+////
+//Route::get('/getuser', function(){
+//   dd(Auth::user());
+//});
 
