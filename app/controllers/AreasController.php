@@ -1,10 +1,7 @@
 <?php
 
 use Aidph\Transformers\AreaTransformer;
-use League\Fractal\Manager;
-use League\Fractal\Resource\Item;
-use League\Fractal\Serializer\DataArraySerializer;
-use League\Fractal\Serializer\JsonApiSerializer;
+use Illuminate\Http\Request;
 use Sorskod\Larasponse\Larasponse;
 
 class AreasController extends ApiController {
@@ -15,7 +12,7 @@ class AreasController extends ApiController {
     {
         $this->fractal = $fractal;
 
-        $this->beforeFilter('auth.basic', ['on' => 'post']);
+//        $this->beforeFilter('auth.basic', ['on' => 'post']);
     }
 
     /**
@@ -26,10 +23,9 @@ class AreasController extends ApiController {
 	 */
 	public function index()
     {
-        $default_limit = ApiController::PAGINATOR_ITEM_LIMIT;
+        $limit = Input::get('limit') ? Input::get('limit') : $this->default_item_limit;
 
-        $limit = Input::get('limit') ? : $default_limit;
-        if($limit > $default_limit) { $limit = $default_limit; }
+        if($limit > $this->default_item_limit) { $limit = $this->default_item_limit; }
 
         $areas = Area::paginate($limit);
 
@@ -55,15 +51,14 @@ class AreasController extends ApiController {
 	 */
 	public function store()
 	{
-
 		if( ! Input::get('name') or ! Input::get('type') )
         {
             return $this->respondValidationFailed('Parameters failed validation for area');
         }
 
-        Area::create(Input::all());
+        $area = Area::create(Input::only('name', 'type', 'contact_person', 'contact_no', 'status'));
 
-        return $this->respondCreated('Area successfully created.');
+        return $this->respondCreated('Area successfully created', $area->id );
     }
 
 	/**
@@ -78,7 +73,7 @@ class AreasController extends ApiController {
         $area = Area::find($id);
 
         if( ! $area){
-            return $this->respondNotFound('Lesson does not exist.');
+            return $this->respondNotFound('Area does not exist.');
         }
 
         return $this->respondWithItem($area, new AreaTransformer());
@@ -105,8 +100,29 @@ class AreasController extends ApiController {
 	 */
 	public function update($id)
 	{
-		//
-	}
+        //
+    }
+
+
+    /**
+     * @param $id
+     */
+    public function postUpdate($id)
+    {
+        $area = Area::findOrFail($id);
+
+        $params = Input::all();
+
+        $area->name = $params['name'];
+        $area->type = $params['type'];
+        $area->contact_person = $params['contact_person'];
+        $area->contact_no = $params['contact_no'];
+        //  $parent_id = $params['parent_id'];
+        $area->status = $params['status'];
+        $area->save();
+
+        Log::info('post update ');
+    }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -117,8 +133,22 @@ class AreasController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$area = Area::findOrFail($id);
+        $area->delete();
 	}
+
+    public function getBrgys()
+    {
+        return Area::where('type', '=', 'BRGY')->orderBy('name')->get(array('id','name'));
+    }
+
+
+    /* Query Scopes */
+
+//    public function scopeBrgys($query)
+//    {
+//        return $query->where('type', '=', 'BRGY');
+//    }
 
 
 }

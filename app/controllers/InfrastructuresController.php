@@ -1,16 +1,18 @@
 <?php
 
+
 use Aidph\Transformers\InfrastructureTransformer;
+use Sorskod\Larasponse\Larasponse;
 
 class InfrastructuresController extends ApiController {
 
-    protected $infraTransformer;
+    protected $fractal;
 
-    function __construct(InfrastructureTransformer $infraTransformer)
+    function __construct(Larasponse $fractal)
     {
-        $this->infraTransformer = $infraTransformer;
+        $this->fractal = $fractal;
 
-        $this->beforeFilter('auth.basic', ['on' => 'post']);
+//        $this->beforeFilter('auth.basic', ['on' => 'post']);
     }
 
     /**
@@ -20,11 +22,13 @@ class InfrastructuresController extends ApiController {
 	 */
 	public function index()
 	{
-        $infras = Infrastructure::all();
+        $limit = Input::get('limit') ? : $this->default_item_limit;
 
-        return $this->respond([
-            'data' => $this->infraTransformer->transformCollection( $infras->all() )
-        ]);
+        if($limit > $this->default_item_limit) { $limit = $this->default_item_limit; }
+
+        $infras = Infrastructure::with('area')->paginate($limit);
+
+        return $this->respondWithPagination($infras, new InfrastructureTransformer());
 	}
 
 
@@ -46,7 +50,13 @@ class InfrastructuresController extends ApiController {
 	 */
 	public function store()
 	{
-		//
+        if ( !Input::get('name') or !Input::get('type') ) {
+            return $this->respondValidationFailed('Parameters failed validation for infrastructure');
+        }
+
+        $infra = Infrastructure::create(Input::only('name', 'brgy_area_id', 'type', 'location', 'remarks', 'status'));
+
+        return $this->respondCreated('Infrastructure successfully created', $infra->id);
 	}
 
 
@@ -56,18 +66,16 @@ class InfrastructuresController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
+    public function show($id)
+    {
         $infra = Infrastructure::find($id);
 
         if( ! $infra){
             return $this->respondNotFound('Infrastructure does not exist.');
         }
-        return $this->respond([
-            'data' => $this->infraTransformer->transform($infra)
-        ]);
-	}
 
+        return $this->respondWithItem($infra, new InfrastructureTransformer());
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -92,6 +100,24 @@ class InfrastructuresController extends ApiController {
 		//
 	}
 
+    /**
+     * @param $id
+     */
+    public function postUpdate($id)
+    {
+        $infra = Infrastructure::findOrFail($id);
+
+        $params = Input::all();
+        $infra->name = $params['name'];
+        $infra->brgy_area_id = $params['brgy_area_id'];
+        $infra->type = $params['type'];
+        $infra->location = $params['location'];
+        $infra->remarks = $params['remarks'];
+        $infra->status = $params['status'];
+        $infra->save();
+
+        Log::info('post update ');
+    }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -101,7 +127,8 @@ class InfrastructuresController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+        $infra = Infrastructure::findOrFail($id);
+        $infra->delete();
 	}
 
     /**

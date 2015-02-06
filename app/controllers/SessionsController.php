@@ -18,11 +18,17 @@ class SessionsController extends ApiController {
         if(Auth::once(array('username' => Input::json('username'), 'password' => Input::json('password'))))
         {
             $user = Auth::user();
+            $area = Area::findOrFail($user->id);
             $data = array(
                 'data' =>
-                    array('username' => $user->username,
+                    array(
+                          'user_id' => $user->id,
+                          'username' => $user->username,
                           'role' => $user->role,
-                          'image_path' => $user->image_path
+                          'image_path' => $user->image_path,
+                          'area_id' => $user->area_id,
+                          'area_type' => $area->type,
+                          'area_name' => $area->name,
                     )
             );
             return $this->respond($data);

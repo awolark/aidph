@@ -22,7 +22,7 @@ class CreateAreasTable extends Migration {
             $table->string('contact_no', 50);
             $table->string('latlng', 50)->nullable();
             $table->text('bounds')->nullable();
-            $table->string('org_chart_path', 255)->nullable();
+//            $table->string('org_chart_path', 255)->nullable();
             $table->string('status', 100)->nullable();
             $table->char('recstat', 1)->default('A');
             $table->timestamps();

@@ -23,7 +23,7 @@ class AreasTableSeeder extends Seeder {
                 'type' => $area_type[ rand(0,4) ],
                 'contact_person' => $faker->name,
                 'contact_no' => $faker->phoneNumber,
-                'latlng' => $faker->latitude + ', ' + $faker->longitude,
+                'latlng' => $faker->latitude . ', ' . $faker->longitude,
                 'status' => 'OK'
 			]);
 		}

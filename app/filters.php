@@ -48,7 +48,6 @@ Route::filter('auth', function()
 
 Route::filter('auth.basic', function()
 {
-//	default: return Auth::basic();
     return Auth::basic('username');
 });
 
@@ -99,4 +98,5 @@ Route::filter('csrf', function()
 Route::filter('access-control', function($route, $request, $response)
 {
     $response->headers->set('Access-Control-Allow-Origin', '*');
+//    $response->headers->set('Access - Control - Allow - Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 });

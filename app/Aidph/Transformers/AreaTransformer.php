@@ -13,15 +13,17 @@ class AreaTransformer extends TransformerAbstract {
     {
         return [
             'id' => $area['id'],
-            'area_name' => $area['name'],
-            'area_type' => $area['type'],
+            'parent_id' => (int) $area['parent_id'],
+            'name' => $area['name'],
+            'type' => $area['type'],
             'contact_person' => $area['contact_person'],
             'contact_no' => $area['contact_no'],
-            'coords' => $area['latlng'],
-            'borders' => $area['bounds'],
-            'parent_area' => (int) $area['parent_id'],
-            'org_chart' => $area['org_chart_path'],
-            'status' => $area['status']
+            'latlng' => $area['latlng'],
+            'bounds' => $area['bounds'],
+            'status' => $area['status'],
+            'recstat' => $area['recstat'],
+            'created_at' => $area['created_at'],
+            'updated_at' => $area['updated_at']
         ];
     }
 }

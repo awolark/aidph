@@ -10,10 +10,10 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
 Route::get('/', function()
 {
-    return View::make('hello');
+   return View::make('hello');
+
 });
 
 Route::get('/expiry', function(){
@@ -34,15 +34,23 @@ Route::get('/register/verify/{confirmation_code}', 'RegistrationController@verif
  */
 Route::post('auth/login', 'SessionsController@store');
 Route::delete('auth/logout', 'SessionsController@destroy');
-Route::get('auth/unlock', 'SessionsController@unlock');
+Route::post('auth/unlock', 'SessionsController@unlock');
 //Route::get('auth/check', 'SessionsController@check');
 
 /*
  * Resource Data
  */
-Route::resource('/areas', 'AreasController');
+
 Route::resource('/infras', 'InfrastructuresController');
+Route::get('/areas/barangays', 'AreasController@getBrgys');
+Route::resource('/areas', 'AreasController');
+
 Route::get('/areas/{id}/infras', 'InfrastructuresController@infras');
+
+Route::post('/areas/{id}', 'AreasController@postUpdate');
+Route::post('/infras/{id}', 'InfrastructuresController@postUpdate');
+
+
 
 
 

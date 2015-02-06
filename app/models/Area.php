@@ -7,8 +7,7 @@ class Area extends \Eloquent {
      * @var array
      */
     protected $fillable = ['parent_id', 'name', 'type', 'contact_person',
-                            'contact_no', 'latlng', 'bounds', 'org_chart_path',
-                            'status', 'recstat'];
+                            'contact_no', 'latlng', 'bounds', 'status', 'recstat'];
 
     /**
      * @return mixed
@@ -17,4 +16,14 @@ class Area extends \Eloquent {
     {
         return $this->hasMany('Infrastructure', 'brgy_area_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('User');
+    }
+
+//    public function parent()
+//    {
+//        return $this->hasOne('Area', 'id', 'parent_id');
+//    }
 }

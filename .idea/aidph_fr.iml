@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/vendor/asm89/stack-cors" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-cors" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-debugbar" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/classpreloader/classpreloader" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/codeception" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
@@ -21,6 +22,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laracasts/testdummy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/fractal" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/maximebf/debugbar" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mustache/mustache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
@@ -61,6 +63,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/routing" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-core" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/translation" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/way/generators" />
     </content>
@@ -69,6 +72,7 @@
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/maximebf/debugbar" />
           <root url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/exporter" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
@@ -88,6 +92,7 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/routing" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/phpunit-mock-objects" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/version" />
+          <root url="file://$MODULE_DIR$/vendor/barryvdh/laravel-debugbar" />
           <root url="file://$MODULE_DIR$/vendor/symfony/debug" />
           <root url="file://$MODULE_DIR$/vendor/phpseclib/phpseclib" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
@@ -112,6 +117,7 @@
           <root url="file://$MODULE_DIR$/vendor/classpreloader/classpreloader" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-text-template" />
           <root url="file://$MODULE_DIR$/vendor/patchwork/utf8" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
           <root url="file://$MODULE_DIR$/vendor/codeception/codeception" />
           <root url="file://$MODULE_DIR$/vendor/symfony/process" />
           <root url="file://$MODULE_DIR$/vendor/symfony/event-dispatcher" />
@@ -132,6 +138,7 @@
           <root url="file://$MODULE_DIR$/vendor/stack/builder" />
         </CLASSES>
         <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/maximebf/debugbar" />
           <root url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/exporter" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
@@ -151,6 +158,7 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/routing" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/phpunit-mock-objects" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/version" />
+          <root url="file://$MODULE_DIR$/vendor/barryvdh/laravel-debugbar" />
           <root url="file://$MODULE_DIR$/vendor/symfony/debug" />
           <root url="file://$MODULE_DIR$/vendor/phpseclib/phpseclib" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
@@ -175,6 +183,7 @@
           <root url="file://$MODULE_DIR$/vendor/classpreloader/classpreloader" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-text-template" />
           <root url="file://$MODULE_DIR$/vendor/patchwork/utf8" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
           <root url="file://$MODULE_DIR$/vendor/codeception/codeception" />
           <root url="file://$MODULE_DIR$/vendor/symfony/process" />
           <root url="file://$MODULE_DIR$/vendor/symfony/event-dispatcher" />

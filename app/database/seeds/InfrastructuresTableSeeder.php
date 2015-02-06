@@ -19,7 +19,7 @@ class InfrastructuresTableSeeder extends Seeder {
                 'name' => $faker->city,
                 'type' => $faker->randomElement($infra_types),
                 'location' => $faker->address,
-                'latlng' => $faker->latitude + ', ' + $faker->longitude,
+                'latlng' => $faker->latitude . ', ' . $faker->longitude,
                 'remarks' => $faker->paragraph(),
                 'status' => 'OK'
 			]);

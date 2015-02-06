@@ -15,7 +15,7 @@ class CreateInfrastructuresTable extends Migration {
 		Schema::create('infrastructures', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('brgy_area_id')->unsigned()->index();
+			$table->integer('brgy_area_id')->unsigned(10)->index();
 			$table->string('name', 100);
 			$table->string('type', 30);
 			$table->string('location', 255);

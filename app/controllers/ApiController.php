@@ -8,7 +8,7 @@ class ApiController extends \BaseController {
 
     protected $fractal;
 
-    const PAGINATOR_ITEM_LIMIT = 20;
+    protected  $default_item_limit = 50;
 
     /**
      * @var int
@@ -100,10 +100,11 @@ class ApiController extends \BaseController {
      * @param $message
      * @return mixed
      */
-    public function respondCreated($message)
+    public function respondCreated($message, $id)
     {
         return $this->setStatusCode(IlluminateResponse::HTTP_CREATED)->respond([
-            'message' => $message
+            'message' => $message,
+            'id' => $id
         ]);
     }
 
