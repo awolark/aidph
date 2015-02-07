@@ -7,7 +7,7 @@ class DatabaseSeeder extends Seeder {
         'users',
         'infrastructures',
         'households',
-        'persons'
+//        'persons'
     ];
 	/**
 	 * Run the database seeds.
@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder {
 
 	}
 
-    private function seedTables(){
+    private function seedTables()
+    {
         foreach($this->tables as $tableName){
             $tableSeeder = ucfirst($tableName) . 'TableSeeder';
             $this->call($tableSeeder);

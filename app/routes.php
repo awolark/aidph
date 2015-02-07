@@ -10,10 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::get('/', function()
-{
-   return View::make('hello');
-});
+Route::get('/', 'HomeController@showWelcome');
 
 Route::get('/expiry', function(){
    Response::json(array('flash' => 'Expired!'), 401);
