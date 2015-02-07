@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="amazon ec2">
+    <serverData>
+      <paths name="amazon ec2">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/api" local="$PROJECT_DIR$" web="api" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
+

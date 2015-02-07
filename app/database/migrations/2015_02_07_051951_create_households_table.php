@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAreasTable extends Migration {
+class CreateHouseholdsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,24 +12,27 @@ class CreateAreasTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('areas', function(Blueprint $table)
+		Schema::create('households', function(Blueprint $table)
 		{
-            $table->increments('id');
-            $table->unsignedInteger('parent_id')->nullable()->index();;
-            $table->string('name', 100);
-            $table->string('type', 10);
-            $table->string('contact_person', 100);
-            $table->string('contact_no', 50);
+			$table->increments('id');
+            $table->unsignedInteger('brgy_area_id')->index();
+            $table->unsignedInteger('head_pers_id')->nullable()->index();
+            $table->string('address', 255);
             $table->string('latlng', 50)->nullable();
             $table->text('bounds')->nullable();
             $table->string('status', 100)->nullable();
             $table->char('recstat', 1)->default('A');
             $table->timestamps();
 
-            $table->foreign('parent_id')
+            $table->foreign('brgy_area_id')
                 ->references('id')
                 ->on('areas')
                 ->onDelete('cascade');
+
+            $table->foreign('head_pers_id')
+                ->references('id')
+                ->on('persons')
+                ->onDelete('set null');
 		});
 	}
 
@@ -41,7 +44,7 @@ class CreateAreasTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('areas');
+		Schema::drop('households');
 	}
 
 }

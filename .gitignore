@@ -1,7 +1,5 @@
 /bootstrap/compiled.php
 /vendor
-/node_modules
-/app/assets/components/bower
 composer.phar
 .env.*.php
 .env.php

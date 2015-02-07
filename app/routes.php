@@ -13,17 +13,16 @@
 Route::get('/', function()
 {
    return View::make('hello');
-
 });
 
 Route::get('/expiry', function(){
    Response::json(array('flash' => 'Expired!'), 401);
 });
+
 /*
  * Register User
  */
 Route::post('/register', 'RegistrationController@register');
-
 /*
  * Verify a User thru email
  */
