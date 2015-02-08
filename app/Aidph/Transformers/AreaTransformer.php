@@ -12,7 +12,7 @@ class AreaTransformer extends TransformerAbstract {
     public function transform(Area $area)
     {
         return [
-            'id' => $area['id'],
+            'referenceId' => $area['id'],
             'parent_id' => (int) $area['parent_id'],
             'name' => $area['name'],
             'type' => $area['type'],
@@ -22,8 +22,8 @@ class AreaTransformer extends TransformerAbstract {
             'bounds' => $area['bounds'],
             'status' => $area['status'],
             'recstat' => $area['recstat'],
-            'created_at' => $area['created_at'],
-            'updated_at' => $area['updated_at']
+            'created_at' => date($area['created_at']),
+            'updated_at' => date($area['updated_at'])
         ];
     }
 }

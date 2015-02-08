@@ -10,7 +10,15 @@ class HouseholdsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+        $limit = Input::get('limit') ? : $this->default_item_limit;
+
+        if ( $limit > $this->default_item_limit ) {
+            $limit = $this->default_item_limit;
+        }
+
+        $households = Household::paginate($limit);
+
+        return $this->respondWithPagination($households, new HouseholdsTransformer());
 	}
 
 	/**

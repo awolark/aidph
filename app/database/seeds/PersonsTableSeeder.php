@@ -9,8 +9,7 @@ class PersonsTableSeeder extends MasterSeeder{
 
 	public function run()
 	{
-        $this->households = Household::lists('id');
-        $this->parent_ids = Person::lists('id');
+
         $this->genders = ['MALE', 'FEMALE'];
 
         foreach(range(1, 100) as $index)
@@ -23,6 +22,8 @@ class PersonsTableSeeder extends MasterSeeder{
 
     public function createSlug()
     {
+        $this->households = Household::lists('id');
+        $this->parent_ids = Person::lists('id');
        return [
             'hh_id' => $this->faker->randomElement($this->households),
             'parent_id' => $this->faker->randomElement($this->parent_ids),
@@ -32,7 +33,7 @@ class PersonsTableSeeder extends MasterSeeder{
             'address' => $this->faker->address,
             'sex' => $this->genders[rand(0,1)],
             'contact_no' => $this->faker->phoneNumber,
-            'occupation' => $this->faker->bs,
+            'occupation' => $this->faker->companySuffix,
             'status' => 'OK'
         ];
     }

@@ -3586,12 +3586,6 @@ namespace {
          * @return \Illuminate\Database\Eloquent\Collection|static[] 
          * @static 
          */
-        public static function get($columns = array()){
-            return \Illuminate\Database\Eloquent\Builder::get($columns);
-        }
-        
-        /**
-         * Pluck a single column from the database.
          *
          * @param string $column
          * @return mixed 

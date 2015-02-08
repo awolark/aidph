@@ -37,14 +37,27 @@ Route::post('auth/unlock', 'SessionsController@unlock');
  * Resource Data
  */
 
-Route::resource('/infras', 'InfrastructuresController');
+/* Infras */
 Route::get('/areas/barangays', 'AreasController@getBrgys');
+Route::resource('/infras', 'InfrastructuresController');
+Route::post('/infras/{id}', 'InfrastructuresController@postUpdate');
+/**/
+
+/* Areas */
 Route::resource('/areas', 'AreasController');
+Route::post('/areas/{id}', 'AreasController@postUpdate');
+/**/
+
+/* Persons */
+Route::resource('/persons', 'PersonsController');
+/**/
+
+/* Households */
+Route::resource('/households', 'HouseholdsController');
+/**/
 
 Route::get('/areas/{id}/infras', 'InfrastructuresController@infras');
 
-Route::post('/areas/{id}', 'AreasController@postUpdate');
-Route::post('/infras/{id}', 'InfrastructuresController@postUpdate');
 
 
 

@@ -28,7 +28,7 @@
             "app/tests/helpers"
         ],
         "psr-4": {
-            "Aidph\\" : "app/Aidph"
+            "Aidph\\": "app/Aidph"
         }
     },
     "scripts": {

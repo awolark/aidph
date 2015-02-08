@@ -72,10 +72,21 @@ class ApiController extends \BaseController {
          return Response::json($data, $this->getStatusCode(), $headers);
     }
 
+    /**
+     * @param $message
+     * @return mixed
+     */
+    public function respondValidationFailed($message)
+    {
+        return $this->setStatusCode(IlluminateResponse::HTTP_UNPROCESSABLE_ENTITY)
+            ->respondWithError($message);
+    }
+
     public function respondWithPagination(Paginator $items, $transformer)
     {
         return $this->respond($this->fractal->paginatedCollection($items, $transformer));
     }
+
 
     public function respondWithItem($item, $transformer)
     {
@@ -106,16 +117,6 @@ class ApiController extends \BaseController {
             'message' => $message,
             'id' => $id
         ]);
-    }
-
-    /**
-     * @param string $message
-     * @return mixed
-     */
-    public function respondValidationFailed($message = 'Validation Failed!')
-    {
-        return $this->setStatusCode(IlluminateResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->respondWithError($message);
     }
 
     public function respondAuthenticationFailed()

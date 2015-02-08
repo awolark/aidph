@@ -7,7 +7,7 @@ class DatabaseSeeder extends Seeder {
         'users',
         'infrastructures',
         'households',
-//        'persons'
+        'persons'
     ];
 	/**
 	 * Run the database seeds.

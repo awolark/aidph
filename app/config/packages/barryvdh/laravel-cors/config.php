@@ -19,7 +19,7 @@ return array(
         'supportsCredentials' => true,
         'allowedOrigins' => array('*'),
         'allowedHeaders' => array('Origin', 'X-Requested-With', 'Content-Type', 'Accept'),
-        'allowedMethods' =>  array('POST', 'PUT', 'GET', 'OPTIONS', 'DELETE'),
+        'allowedMethods' => array('POST', 'PUT', 'GET', 'OPTIONS', 'DELETE'),
         'exposedHeaders' => array('*'),
         'maxAge' => 3600,
         'hosts' => array('*')
@@ -29,7 +29,7 @@ return array(
     '*' => array(
         'allowedOrigins' => array('*'),
         'allowedHeaders' => array('*'),
-        'allowedMethods' => array('POST', 'PUT', 'GET', 'DELETE', 'OPTIONS'),
+        'allowedMethods' => array('POST', 'PUT', 'GET', 'OPTIONS', 'DELETE'),
         'maxAge' => 3600,
         'hosts' => array('*'),
     )

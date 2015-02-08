@@ -1,18 +1,20 @@
 <?php
 
 use Aidph\Transformers\AreaTransformer;
-use Illuminate\Http\Request;
+use Aidph\Services\AreaCreatorService;
+use Aidph\Validators\ValidationException;
 use Sorskod\Larasponse\Larasponse;
 
 class AreasController extends ApiController {
 
     protected $fractal;
+    protected $areaCreator;
 
-    function __construct(Larasponse $fractal)
+    function __construct(Larasponse $fractal, AreaCreatorService $areaCreator)
     {
+        $this->areaCreator = $areaCreator;
         $this->fractal = $fractal;
-
-//        $this->beforeFilter('auth.basic', ['on' => 'post']);
+     // $this->beforeFilter('auth.basic', ['on' => 'post']);
     }
 
     /**
@@ -50,17 +52,15 @@ class AreasController extends ApiController {
 	 * @return Response
 	 */
 	public function store()
-	{
-		if( ! Input::get('name') or ! Input::get('type') )
-        {
-            return $this->respondValidationFailed('Parameters failed validation for area');
+    {
+        try {
+            $area = $this->areaCreator->make(Input::all());
+
+            return $this->respondCreated('Area successfully created', $area->id);
+        } catch ( Aidph\Validators\ValidationException $e ) {
+            return $this->respondValidationFailed($e->getErrors());
         }
-
-        $area = Area::create(Input::only('name', 'type', 'contact_person', 'contact_no', 'status'));
-
-        return $this->respondCreated('Area successfully created', $area->id );
     }
-
 	/**
 	 * Display the specified resource.
 	 * GET /areas/{id}
@@ -100,7 +100,19 @@ class AreasController extends ApiController {
 	 */
 	public function update($id)
 	{
-        //
+        $area = Area::findOrFail($id);
+
+        $area->save(Input::all());
+//        $params = Input::all();
+
+
+//        $area->name = $params['name'];
+//        $area->type = $params['type'];
+//        $area->contact_person = $params['contact_person'];
+//        $area->contact_no = $params['contact_no'];
+        //  $parent_id = $params['parent_id'];
+//        $area->status = $params['status'];
+//        $area->save();
     }
 
 
@@ -109,19 +121,31 @@ class AreasController extends ApiController {
      */
     public function postUpdate($id)
     {
-        $area = Area::findOrFail($id);
+//        try {
+//            $area = $this->areaCreator->update(Input::all(), $id);
+//
+//            return $this->respondCreated('Area successfully Updated', $area->id);
+//        } catch ( ValidationException $e ) {
+//            return $this->respondValidationFailed($e->getErrors());
+//        }
 
-        $params = Input::all();
 
-        $area->name = $params['name'];
-        $area->type = $params['type'];
-        $area->contact_person = $params['contact_person'];
-        $area->contact_no = $params['contact_no'];
-        //  $parent_id = $params['parent_id'];
-        $area->status = $params['status'];
-        $area->save();
 
-        Log::info('post update ');
+//        $area = Area::findOrFail($id);
+//
+//        $params = Input::all();
+//
+//        $area->name = $params['name'];
+//        $area->type = $params['type'];
+//        $area->contact_person = $params['contact_person'];
+//        $area->contact_no = $params['contact_no'];
+//        //  $parent_id = $params['parent_id'];
+//        $area->status = $params['status'];
+//        $area->save();
+
+
+
+//        Log::info('post update ');
     }
 
 	/**

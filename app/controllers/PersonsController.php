@@ -1,8 +1,22 @@
 <?php
 
+use Sorskod\Larasponse\Larasponse;
+use Aidph\Transformers\PersonsTransformer;
+
 class PersonsController extends ApiController {
 
-	/**
+
+    protected $fractal;
+
+    /**
+     * @param Larasponse $fractal
+     */
+    function __construct(Larasponse $fractal)
+    {
+        $this->fractal = $fractal;
+    }
+
+    /**
 	 * Display a listing of the resource.
 	 * GET /persons
 	 *
@@ -10,7 +24,15 @@ class PersonsController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+        $limit = Input::get('limit') ? : $this->default_item_limit;
+
+        if ( $limit > $this->default_item_limit ) {
+            $limit = $this->default_item_limit;
+        }
+
+        $persons = Person::paginate($limit);
+
+        return $this->respondWithPagination($persons, new PersonsTransformer());
 	}
 
 	/**
