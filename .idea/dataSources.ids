@@ -1,68 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source name="MySQL - aidph_db@localhost" uuid="e56eb740-fe83-40e5-8c0c-3d850aa038be">
-    <database-info product="MySQL" version="5.6.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.31 ( Revision: alexander.soklakov@oracle.com-20140520065950-groqzzbvxprqdmnz )">
-      <extra-name-characters>#@</extra-name-characters>
-      <identifier-quote-string>`</identifier-quote-string>
-    </database-info>
-    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
-    <schema name="" catalog="aidph_db"/>
-    <table name="areas" schema="" catalog="aidph_db" type="TABLE">
-      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="parent_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
-      <column name="type" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
-      <column name="contact_person" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
-      <column name="contact_no" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
-      <column name="latlng" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
-      <column name="bounds" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
-      <column name="status" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
-      <column name="recstat" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1" def="J0En"/>
-      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
-      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="areas_parent_id_foreign" columns="parent_id" ref-table="areas" ref-schema="" ref-catalog="aidph_db" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
-      <exported-key name="areas_parent_id_foreign" table="areas" schema="" catalog="aidph_db" columns="parent_id"/>
-      <exported-key name="infrastructures_brgy_area_id_foreign" table="infrastructures" schema="" catalog="aidph_db" columns="brgy_area_id"/>
-      <exported-key name="users_area_id_foreign" table="users" schema="" catalog="aidph_db" columns="area_id"/>
-      <index name="areas_parent_id_foreign" unique="false" columns="parent_id"/>
-    </table>
-    <table name="infrastructures" schema="" catalog="aidph_db" type="TABLE">
-      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="brgy_area_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
-      <column name="type" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
-      <column name="location" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="latlng" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
-      <column name="remarks" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
-      <column name="status" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="J09LJw=="/>
-      <column name="recstat" sqlType="CHAR" precision="255" scale="0" nullable="false" jdbcType="1" def="J0En"/>
-      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
-      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="infrastructures_brgy_area_id_foreign" columns="brgy_area_id" ref-table="areas" ref-schema="" ref-catalog="aidph_db" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="infrastructures_brgy_area_id_index" unique="false" columns="brgy_area_id"/>
-    </table>
-    <table name="migrations" schema="" catalog="aidph_db" type="TABLE">
-      <column name="migration" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="batch" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-    </table>
-    <table name="users" schema="" catalog="aidph_db" type="TABLE">
-      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="area_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="username" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="password" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
-      <column name="email" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
-      <column name="role" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
-      <column name="gcm_regid" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
-      <column name="image_path" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="remember_token" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
-      <column name="recstat" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1" def="J0En"/>
-      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
-      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="users_area_id_foreign" columns="area_id" ref-table="areas" ref-schema="" ref-catalog="aidph_db" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="users_area_id_index" unique="false" columns="area_id"/>
-    </table>
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
 </component>
