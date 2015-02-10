@@ -9,7 +9,10 @@
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the Closure to execute when that URI is requested.
 |
-*/
+ */
+
+// header('Access-Control-Allow-Origin: *');
+
 Route::get('/', 'HomeController@showWelcome');
 
 Route::get('/expiry', function(){
@@ -45,7 +48,7 @@ Route::post('/infras/{id}', 'InfrastructuresController@postUpdate');
 
 /* Areas */
 Route::resource('/areas', 'AreasController');
-Route::post('/areas/{id}', 'AreasController@postUpdate');
+// Route::post('/areas/{id}', 'AreasController@postUpdate');
 /**/
 
 /* Persons */

@@ -102,7 +102,10 @@ class AreasController extends ApiController {
 	{
         $area = Area::findOrFail($id);
 
-        $area->save(Input::all());
+		// $area->save(Input::all());
+		return Response::json(Input::all(), 200);
+
+        // $area->save(Input::all());
 //        $params = Input::all();
 
 
