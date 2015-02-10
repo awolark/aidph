@@ -1,0 +1,47 @@
+parent_id,name,type
+,NDRRMC,NDRRMC
+1,Region VI,RDRRMC
+2,Aklan,PROVINCE
+3,Malay Aklan,MUN
+3,Caticlan Malay,MUN
+3,Balabag Malay,MUN
+3,Kalibo Aklan,MUN
+7,Andagao Kalibo,BRGY
+7,Poblacion Kalibo,BRGY
+2,Iloilo               ,PROVINCE
+10,Guimbal Iloilo,CITY         
+11,Baras Guimbal,BRGY
+11,Bagumbayan Guimbal,BRGY
+10,Igbaras Iloilo,CITY         
+14,Cale Igbaras,BRGY
+14,Buenavista Igbaras,BRGY
+1,Region VII,RDRRMC
+17,Cebu ,PROVINCE
+18,Cebu ,CITY         
+19,Santa Cruz,BRGY
+19,Inayawan,BRGY
+18,Mandaue             ,CITY         
+22,Tipolo              ,BRGY
+22,Basak               ,BRGY
+17,Bohol,PROVINCE
+25,Inabanga            ,MUN
+26,Lawis               ,BRGY
+26,Cogon               ,BRGY
+25,Loboc               ,MUN
+29,Agape               ,BRGY
+29,Alegria             ,BRGY
+1,Region VIII,RDRRMC
+32,Northern Leyte,PROVINCE     
+33,Tacloban            ,CITY         
+34,Magallanes          ,BRGY
+34,El Reposo,BRGY
+33,Ormoc               ,CITY         
+37,Cogon Combado,BRGY
+37,Alta Vista,BRGY
+32,Southern Leyte,PROVINCE     
+40,Maasin              ,MUN
+41,Cabadiangan         ,BRGY
+41,Libertad            ,BRGY
+40,Hinundayan          ,MUN
+40,Plaridel            , MUN
+40,Bacolod             ,MUN

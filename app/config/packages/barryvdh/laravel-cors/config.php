@@ -18,21 +18,20 @@ return array(
     'defaults' => array(
         'supportsCredentials' => true,
         'allowedOrigins' => array('*'),
-        'allowedHeaders' => array('Origin', 'X-Requested-With', 'Content-Type', 'Accept'),
-        'allowedMethods' => array('POST', 'PUT', 'GET', 'OPTIONS', 'DELETE'),
+        'allowedHeaders' => array('Content-Type', 'Authorization', 'Accept', 'X-Requested-With', 'Origin'),
+        'allowedMethods' => array('POST', 'PUT', 'GET', 'DELETE', 'OPTIONS'),
         'exposedHeaders' => array('*'),
         'maxAge' => 3600,
         'hosts' => array('*')
     ),
 
     'paths' => array(
-    '*' => array(
-        'allowedOrigins' => array('*'),
-        'allowedHeaders' => array('*'),
-        'allowedMethods' => array('POST', 'PUT', 'GET', 'OPTIONS', 'DELETE'),
-        'maxAge' => 3600,
-        'hosts' => array('*'),
-    )
-),
+        '*' => array(
+            'allowedOrigins' => array('*'),
+            'allowedHeaders' => array('Content-Type', 'Authorization', 'Accept', 'X-Requested-With', 'Origin'),
+            'allowedMethods' => array('POST', 'PUT', 'GET', 'DELETE', 'OPTIONS'),
+            'hosts' => array('*')
+        ),
+    ),
 
 );

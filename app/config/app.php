@@ -127,6 +127,7 @@ return array(
         'Sorskod\Larasponse\LarasponseServiceProvider',
         'Laracasts\Commander\CommanderServiceProvider',
         'Barryvdh\Cors\CorsServiceProvider',
+        'Aidph\Providers\EventServiceProvider'
 	),
 
 	/*

@@ -16,14 +16,14 @@ class CreateUsersTable extends Migration {
 		{
             $table->increments('id');
             $table->unsignedInteger('area_id')->index();
-            $table->string('username', 20);
+            $table->string('username', 20)->unique();
             $table->string('password', 60);
-            $table->string('email', 100);
+            $table->string('email', 100)->unique();
             $table->tinyInteger('role');
             $table->string('gcm_regid', 100)->nullable();
             $table->string('image_path', 255)->nullable();
             $table->string('remember_token', 100)->nullable();
-            $table->char('recstat', 1)->default('A');
+            $table->char('recstat', 1)->default('A')->nullable();
             $table->timestamps();
 
             $table->foreign('area_id')

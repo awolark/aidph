@@ -15,15 +15,15 @@ class CreateAreasTable extends Migration {
 		Schema::create('areas', function(Blueprint $table)
 		{
             $table->increments('id');
-            $table->unsignedInteger('parent_id')->nullable()->index();;
+            $table->unsignedInteger('parent_id')->default();
             $table->string('name', 100);
             $table->string('type', 10);
             $table->string('contact_person', 100);
             $table->string('contact_no', 50);
             $table->string('latlng', 50)->nullable();
             $table->text('bounds')->nullable();
-            $table->string('status', 100)->nullable();
-            $table->char('recstat', 1)->default('A');
+            $table->string('status', 100)->default('A')->nullable();
+            $table->char('recstat', 1)->default('A')->nullable();
             $table->timestamps();
 
             $table->foreign('parent_id')

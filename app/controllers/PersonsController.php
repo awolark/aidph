@@ -35,16 +35,6 @@ class PersonsController extends ApiController {
         return $this->respondWithPagination($persons, new PersonsTransformer());
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /persons/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
 
 	/**
 	 * Store a newly created resource in storage.
@@ -54,7 +44,7 @@ class PersonsController extends ApiController {
 	 */
 	public function store()
 	{
-		//
+        Person::create(Input::all());
 	}
 
 	/**
@@ -69,17 +59,7 @@ class PersonsController extends ApiController {
 		//
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /persons/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+
 
 	/**
 	 * Update the specified resource in storage.
