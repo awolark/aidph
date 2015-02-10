@@ -27,7 +27,11 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	'local' => array( 'Wayne-PC' ),
+<<<<<<< HEAD
 
+=======
+    'production' => array('*.com')
+>>>>>>> backup-2-10-15
 ));
 
 /*

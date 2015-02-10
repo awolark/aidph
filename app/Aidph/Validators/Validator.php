@@ -20,6 +20,9 @@ abstract class Validator {
     }
 
 
+    /**
+     * @return array
+     */
     public function getErrors()
     {
         return $this->errors;

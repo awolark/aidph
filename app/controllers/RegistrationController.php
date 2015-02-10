@@ -1,41 +1,51 @@
 <?php
 
+use Aidph\Registration\RegisterUserCommand;
 use Laracasts\Commander\CommanderTrait;
+use Sorskod\Larasponse\Larasponse;
 
-class RegistrationController extends \BaseController {
+class RegistrationController extends ApiController {
 
     use CommanderTrait;
 
+    protected $validator;
+
+    function __construct(AreaValidator $validator, Larasponse $fractal)
+    {
+        $this->validator = $validator;
+
+        parent::__construct($fractal);
+    }
+
+    /**
+	 * Store a newly created resource in storage.
+	 * POST /registration
+	 *
+	 * @return Response
+	 */
+	public function register()
+	{
+        if ( $this->validator->isValid( Input::all()) ) {
+
+            $user = $this->execute(RegisterUserCommand::class);
+
+            return $this->respondCreated('User successfully created', $user->id);
+        }
+        else {
+            return $this->respondValidationFailed($this->validator->getErrors());
+        }
+    }
 
     /**
      * Verify User From Email
      * with confirmation code
      *
      */
-    public function verify( $confirmation_code ){
-        dd($confirmation_code);
-    }
+//    public function verify( $confirmation_code ){
+//        dd($confirmation_code);
+//    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /registration
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//TODO registrationForm Validation
-        // ex: $this->registrationForm->validate(Input::all());
-
-        //$this->execute(RegisterUserCommand::class);
-        //Auth:login( $user );
-
-        //flash message 'You are now registered!'
-
-        //return Redirect::home();
-	}
-
-	/**
+    /**
 	 * Display the specified resource.
 	 * GET /registration/{id}
 	 *

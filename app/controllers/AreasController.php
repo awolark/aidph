@@ -2,18 +2,17 @@
 
 use Aidph\Transformers\AreaTransformer;
 use Aidph\Services\AreaCreatorService;
-use Aidph\Validators\ValidationException;
 use Sorskod\Larasponse\Larasponse;
 
 class AreasController extends ApiController {
 
-    protected $fractal;
     protected $areaCreator;
 
     function __construct(Larasponse $fractal, AreaCreatorService $areaCreator)
     {
         $this->areaCreator = $areaCreator;
-        $this->fractal = $fractal;
+
+        parent::__construct($fractal);
      // $this->beforeFilter('auth.basic', ['on' => 'post']);
     }
 
@@ -35,17 +34,6 @@ class AreasController extends ApiController {
     }
 
 	/**
-	 * Show the form for creating a new resource.
-	 * GET /areas/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
 	 * Store a newly created resource in storage.
 	 * POST /areas
 	 *
@@ -57,7 +45,9 @@ class AreasController extends ApiController {
             $area = $this->areaCreator->make(Input::all());
 
             return $this->respondCreated('Area successfully created', $area->id);
-        } catch ( Aidph\Validators\ValidationException $e ) {
+        }
+        catch ( Aidph\Validators\ValidationException $e )
+        {
             return $this->respondValidationFailed($e->getErrors());
         }
     }
@@ -80,18 +70,6 @@ class AreasController extends ApiController {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 * GET /areas/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
 	 * Update the specified resource in storage.
 	 * PUT /areas/{id}
 	 *
@@ -100,6 +78,7 @@ class AreasController extends ApiController {
 	 */
 	public function update($id)
 	{
+<<<<<<< HEAD
         $area = Area::findOrFail($id);
 
 		// $area->save(Input::all());
@@ -107,15 +86,19 @@ class AreasController extends ApiController {
 
         // $area->save(Input::all());
 //        $params = Input::all();
+=======
+        $area = Area::find($id);
+>>>>>>> backup-2-10-15
 
+        $params = Input::all();
 
-//        $area->name = $params['name'];
-//        $area->type = $params['type'];
-//        $area->contact_person = $params['contact_person'];
-//        $area->contact_no = $params['contact_no'];
+        $area->name = $params['name'];
+        $area->type = $params['type'];
+        $area->contact_person = $params['contact_person'];
+        $area->contact_no = $params['contact_no'];
         //  $parent_id = $params['parent_id'];
-//        $area->status = $params['status'];
-//        $area->save();
+        $area->status = $params['status'];
+        $area->save();
     }
 
 
@@ -133,21 +116,6 @@ class AreasController extends ApiController {
 //        }
 
 
-
-//        $area = Area::findOrFail($id);
-//
-//        $params = Input::all();
-//
-//        $area->name = $params['name'];
-//        $area->type = $params['type'];
-//        $area->contact_person = $params['contact_person'];
-//        $area->contact_no = $params['contact_no'];
-//        //  $parent_id = $params['parent_id'];
-//        $area->status = $params['status'];
-//        $area->save();
-
-
-
 //        Log::info('post update ');
     }
 
@@ -158,18 +126,26 @@ class AreasController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($id = null)
 	{
+        Log::info('Delete id: '.$id);
 		$area = Area::findOrFail($id);
         $area->delete();
 	}
 
+    /**
+     * Get all barangay areas
+     * with their id and name only
+     *
+     * @return mixed
+     */
     public function getBrgys()
     {
         return Area::where('type', '=', 'BRGY')->orderBy('name')->get(array('id','name'));
     }
 
 
+<<<<<<< HEAD
     /* Query Scopes */
 
 //    public function scopeBrgys($query)
@@ -179,3 +155,6 @@ class AreasController extends ApiController {
 
 
 }
+=======
+}
+>>>>>>> backup-2-10-15

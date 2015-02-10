@@ -1,6 +1,8 @@
 <?php
 
-class UsersController extends \BaseController {
+use Aidph\Transformers\UserTransformer;
+
+class UsersController extends ApiController {
 
 	/**
 	 * Display a listing of the resource.
@@ -10,18 +12,19 @@ class UsersController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
-	}
+        $loggedUserId = Input::get('loggedUserId');
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /users/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+        $limit = Input::get('limit') ? Input::get('limit') : $this->default_item_limit;
+
+        if ( $limit > $this->default_item_limit ) {
+            $limit = $this->default_item_limit;
+        }
+
+        $users = User::where('id','!=',$loggedUserId)
+                ->orderBy('recstat','asc')
+                ->paginate($limit);
+
+        return $this->respondWithPagination($users, new UserTransformer());
 	}
 
 	/**
@@ -43,18 +46,6 @@ class UsersController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /users/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
 	{
 		//
 	}
@@ -82,5 +73,11 @@ class UsersController extends \BaseController {
 	{
 		//
 	}
+
+    public function getLoggedUserAreas($id)
+    {
+        $user = DB::select(DB::raw("SELECT "));
+//        Log::info(print_r($user, true));
+    }
 
 }

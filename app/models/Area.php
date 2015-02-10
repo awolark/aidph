@@ -1,6 +1,10 @@
 <?php
 
+use Aidph\Helpers\AreaQueryHelperTrait;
+
 class Area extends \Eloquent {
+
+    use AreaQueryHelperTrait;
 
     static $area_type = ['NATIONAL', 'REGION','PROVINCE', 'CITY', 'BRGY'];
     /**
@@ -22,8 +26,7 @@ class Area extends \Eloquent {
         return $this->belongsToMany('User');
     }
 
-//    public function parent()
-//    {
-//        return $this->hasOne('Area', 'id', 'parent_id');
-//    }
+    /* Query Scopes */
+
+
 }

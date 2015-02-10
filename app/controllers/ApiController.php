@@ -22,7 +22,7 @@ class ApiController extends \BaseController {
     {
         $this->fractal = $fractal;
 
-        $this->afterFilter('access-control');
+//        $this->afterFilter('access-control');
     }
 
     /**

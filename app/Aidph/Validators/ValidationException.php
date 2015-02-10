@@ -6,7 +6,7 @@ class ValidationException extends Exception {
 
     protected $errors;
 
-    function __construct($message, $errors, $code = 0, Exception $previous = null)
+    function __construct($message, array $errors, $code = 0, Exception $previous = null)
     {
         $this->errors = $errors;
 

@@ -3,11 +3,11 @@
 class DatabaseSeeder extends Seeder {
 
     private $tables = [
-        'areas',
-        'users',
-        'infrastructures',
-        'households',
-        'persons'
+        'areas'
+//        'users',
+//        'infrastructures',
+//        'households',
+//        'persons'
     ];
 	/**
 	 * Run the database seeds.
@@ -26,10 +26,15 @@ class DatabaseSeeder extends Seeder {
 
     private function seedTables()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DB::statement('SET sql_mode = NO_AUTO_VALUE_ON_ZERO');
+
         foreach($this->tables as $tableName){
             $tableSeeder = ucfirst($tableName) . 'TableSeeder';
             $this->call($tableSeeder);
         }
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 
     private function cleanDatabase()

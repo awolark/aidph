@@ -1,7 +1,7 @@
 <?php namespace Aidph\Transformers;
 
-use Area;
 use League\Fractal\TransformerAbstract;
+use Area;
 
 class AreaTransformer extends TransformerAbstract {
 
