@@ -10,4 +10,11 @@ class Infrastructure extends \Eloquent {
     {
         return $this->belongsTo('Area', 'brgy_area_id', 'id');
     }
+
+    /* Query Scopes */
+
+    public function scopeBrgy($query, $area_id)
+    {
+        return $query->where('brgy_area_id', '=', $area_id);
+    }
 }

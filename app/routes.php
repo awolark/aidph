@@ -8,56 +8,24 @@
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the Closure to execute when that URI is requested.
 |
-<<<<<<< HEAD
- */
-
-// header('Access-Control-Allow-Origin: *');
-
-Route::get('/', 'HomeController@showWelcome');
-=======
 */
 
 
-
-Event::listen('Aidph.Registration.Events.UserHasCreated', function($event)
-{
-    dd('send a notification email');
-});
-
-Route::get('/', function(){
-    $area = Area::find(18);
-    $areas = Area::getAreaAndChildren($area);
-    foreach($areas as $a){
-        echo $a->name.'<br/>';
-    }
-});
-
->>>>>>> backup-2-10-15
-
-Route::get('/expiry', function(){
-   Response::json(array('flash' => 'Expired!'), 401);
-});
+//Event::listen('Aidph.Registration.Events.UserHasCreated', function ($event) {
+////    dd('send a notification email');
+//});
 
 
+use Aidph\Helpers\UserQueryHelperTrait;
 
+Route::group(['after' => 'access-control'], function () {
 
-
-<<<<<<< HEAD
-/* Areas */
-Route::resource('/areas', 'AreasController');
-// Route::post('/areas/{id}', 'AreasController@postUpdate');
-/**/
-=======
-Route::group(['after' => 'access-control'], function(){
-    /*
-     * Register User
-     */
-//    Route::post('/register', 'RegistrationController@register');
+   /*
+    * Register User
+    */
     Route::post('/register', 'RegistrationController@register');
 
-    /*
-     * Verify a User thru email
-     */
+    // Verify a User thru email
     Route::get('/register/verify/{confirmation_code}', 'RegistrationController@verify');
 
     /*
@@ -66,20 +34,34 @@ Route::group(['after' => 'access-control'], function(){
     Route::post('auth/login', 'SessionsController@store');
 
     Route::delete('auth/logout', 'SessionsController@destroy');
->>>>>>> backup-2-10-15
 
-    Route::post('auth/unlock', 'SessionsController@unlock');
+
     /*
      * Resource Data
      */
 
+    /* Users Registration */
+    Route::post('/users', 'RegistrationController@register');
+
+
     /* Users */
     Route::resource('/users', 'UsersController',
-        array('only' => array('index', 'show', 'store', 'destroy')));
+        array('only' => array('index', 'show', 'destroy')));
 
-//    Route::post('/users/{id}', 'UsersController@postUpdate');
     Route::get('/users/{id}/areas', 'UsersController@getLoggedUserAreas');
+
+    Route::get('/users/generate_username', 'UsersController@generateUsername');
     /* */
+
+    /* Areas */
+    Route::resource('/areas', 'AreasController',
+        array('only' => array('index', 'show', 'store', 'destroy', 'update')));
+
+    Route::get('/areas/barangays', 'AreasController@getBrgys');
+
+    Route::get('/areas/{id}/infras', 'InfrastructuresController@infras');
+    // Route::post('/areas/{id}', 'AreasController@postUpdate');
+    /**/
 
     /* Infras */
     Route::resource('/infras', 'InfrastructuresController',
@@ -88,13 +70,6 @@ Route::group(['after' => 'access-control'], function(){
     Route::post('/infras/{id}', 'InfrastructuresController@postUpdate');
     /**/
 
-    /* Areas */
-    Route::resource('/areas', 'AreasController',
-        array('only' => array('index', 'show', 'store', 'destroy', 'update')));
-
-    Route::get('/areas/barangays', 'AreasController@getBrgys');
-//    Route::post('/areas/{id}', 'AreasController@postUpdate');
-    /**/
 
     /* Persons */
     Route::resource('/persons', 'PersonsController',
@@ -102,33 +77,51 @@ Route::group(['after' => 'access-control'], function(){
     /**/
 
     /* Households */
-    Route::resource('/households', 'HouseholdsController');
+    Route::resource('/households', 'HouseholdsController',
+        array('only' => array('index', 'show', 'store', 'destroy')));
     /**/
 
-    Route::get('/areas/{id}/infras', 'InfrastructuresController@infras');
 
 
+    Route::get('/', function () {
+//        $area = Area::find(1);
+//        $firstLevelAreaOnly = true;
+//        $areas = Area::getAreaAndChildren($area, $firstLevelAreaOnly);
+//        foreach ( $areas as $a ) {
+//            echo $a->name . '<br/>';
+//        }
+//        $data = [
+//            'confirmation_code' => str_random(30)
+//        ];
+//
+//        Mail::send('emails.registration.confirm', $data, function($message)
+//        {
+//           $message->to('waynearila@gmail.com')
+//                   ->subject('Test');
+//        });
+
+//        $areaIds = [];
+//        $users = [];
+//
+//        $loggedUsersArea = UserQueryHelperTrait::getUsersArea(18);
+//        $areaIds = Area::getAreaIdsForUser(18);
+//        $areas = Area::where('id', '!=', $loggedUsersArea->id)
+//            ->whereIn('area_id', $areaIds)
+//            ->orderBy('id', 'asc')
+//            ->paginate(25);
+//
+//        dd($areas);
+
+
+    });
 
 
 });
-
-
-
-
-
-
-
-
-//Route::get('login', function(){
-//        echo (Auth::attempt(array('username' => 'admin', 'password' => '1234'))
-//            ) ? 'success login' : 'failed login' ;
+// for testing only
+//Route::get('/expiry', function () {
+//    Response::json(array('flash' => 'Expired!'), 401);
 //});
 //
-//Route::get('logout', function(){
-//    Auth::logout();
-//});
-////
-//Route::get('/getuser', function(){
-//   dd(Auth::user());
-//});
+
+
 

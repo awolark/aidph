@@ -9,10 +9,15 @@ class UserMailer extends Mailer {
      */
     public function sendConfirmationMessage(User $user)
     {
-        $subject = 'Welcome to #aidPH';
+        $subject = 'Welcome to aidPH';
         $view = 'emails.registration.confirm';
 
-        return $this->sendTo($user, $subject, $view);
+        $confirmation_code = $user->password;
+        $data = [
+            'confirmation_code' => $confirmation_code
+        ];
+
+        return $this->sendTo($user, $subject, $view, $data);
     }
 
 }

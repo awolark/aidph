@@ -10,6 +10,7 @@ class UserTransformer extends TransformerAbstract {
         return [
             'referenceId' => $item['id'],
             'area_id' => (int) $item['area_id'],
+            'area_name' => $item->area->name,
             'username' => $item['username'],
             'email' => $item['email'],
             'role' => (int) $item['role'],

@@ -22,11 +22,17 @@ class InfrastructuresController extends ApiController {
 	 */
 	public function index()
 	{
+        $loggedUserId = Input::get('loggedUserId');
+
         $limit = Input::get('limit') ? : $this->default_item_limit;
 
         if($limit > $this->default_item_limit) { $limit = $this->default_item_limit; }
 
-        $infras = Infrastructure::with('area')->paginate($limit);
+        $areaIds = Area::getAreaIdsForUser($loggedUserId, '', true);
+
+        $infras = Infrastructure::whereIn('brgy_area_id', $areaIds)
+            ->orderBy('recstat', 'asc')
+            ->paginate($limit);
 
         return $this->respondWithPagination($infras, new InfrastructureTransformer());
 	}

@@ -3,17 +3,17 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAreasTable extends Migration {
+class CreateAreasTable extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('areas', function(Blueprint $table)
-		{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('parent_id')->default();
             $table->string('name', 100);
@@ -30,18 +30,18 @@ class CreateAreasTable extends Migration {
                 ->references('id')
                 ->on('areas')
                 ->onDelete('cascade');
-		});
-	}
+        });
+    }
 
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('areas');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('areas');
+    }
 
 }

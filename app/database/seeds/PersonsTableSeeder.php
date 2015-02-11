@@ -37,4 +37,9 @@ class PersonsTableSeeder extends MasterSeeder{
             'status' => 'OK'
         ];
     }
+
+    public function csvData()
+    {
+        // TODO: Implement csvData() method.
+    }
 }

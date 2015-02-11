@@ -1,16 +1,18 @@
 <?php
 
+use Aidph\Helpers\UserHelperTrait;
 use Aidph\Registration\RegisterUserCommand;
+use Aidph\Validators\UserValidator;
 use Laracasts\Commander\CommanderTrait;
 use Sorskod\Larasponse\Larasponse;
 
 class RegistrationController extends ApiController {
 
-    use CommanderTrait;
+    use CommanderTrait, UserHelperTrait;
 
     protected $validator;
 
-    function __construct(AreaValidator $validator, Larasponse $fractal)
+    function __construct(UserValidator $validator, Larasponse $fractal)
     {
         $this->validator = $validator;
 
@@ -25,14 +27,30 @@ class RegistrationController extends ApiController {
 	 */
 	public function register()
 	{
-        if ( $this->validator->isValid( Input::all()) ) {
+        /* Generate Username based on email
+            Generate also random confirmation code as password
+            to be confirmed by the users email
+         */
+        $input['username'] = static::generateUserNameFromEmail(Input::get('email'));
+        $input['password'] = str_random(30);
+
+        Input::merge($input);
+
+        if ( $this->validator->isValid(Input::all()) ) {
+
+            Log::info('Validation Success');
+
+            Log::info('Input: ' . print_r(Input::all(), true));
 
             $user = $this->execute(RegisterUserCommand::class);
 
             return $this->respondCreated('User successfully created', $user->id);
-        }
-        else {
+
+        } else {
+
+            Log::error('Validation Failed');
             return $this->respondValidationFailed($this->validator->getErrors());
+
         }
     }
 
@@ -41,9 +59,9 @@ class RegistrationController extends ApiController {
      * with confirmation code
      *
      */
-//    public function verify( $confirmation_code ){
-//        dd($confirmation_code);
-//    }
+    public function verify( $confirmation_code ){
+        dd($confirmation_code);
+    }
 
     /**
 	 * Display the specified resource.

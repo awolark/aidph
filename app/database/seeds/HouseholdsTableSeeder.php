@@ -25,4 +25,9 @@ class HouseholdsTableSeeder extends MasterSeeder {
                 'status' => 'OK'
             ];
     }
+
+    public function csvData()
+    {
+        // TODO: Implement csvData() method.
+    }
 }

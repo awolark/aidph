@@ -22,7 +22,7 @@ class ApiController extends \BaseController {
     {
         $this->fractal = $fractal;
 
-//        $this->afterFilter('access-control');
+        // $this->afterFilter('access-control');
     }
 
     /**
@@ -109,6 +109,7 @@ class ApiController extends \BaseController {
 
     /**
      * @param $message
+     * @param $id
      * @return mixed
      */
     public function respondCreated($message, $id)
@@ -132,5 +133,10 @@ class ApiController extends \BaseController {
                 ->respondWithError($errorMessage);
     }
 
+    public function respondWithDataRequested($data)
+    {
+        return $this->setStatusCode(IlluminateResponse::HTTP_OK)
+            ->respond($data);
+    }
 
 }

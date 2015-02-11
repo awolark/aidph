@@ -3,10 +3,11 @@
 class UserValidator extends Validator {
 
     protected static $rules = [
-        'name' => 'required',
-        'type' => 'required',
-        'contact_person' => 'required',
-        'contact_no' => 'required',
+        'area_id' => 'required|exists:areas,id',
+        'username' => 'required|unique:users',
+        'password' => 'required',
+        'email' => 'unique:users|email|required',
+        'role' => 'required|digits_between:1,2'
     ];
 
 }

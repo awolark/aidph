@@ -7,8 +7,11 @@ class HouseholdsTransformer extends Transformer {
         return [
             'referenceId' => $item['id'],
             'brgy_area_id' => $item['brgy_area_id'],
+            'brgy_name' => $item->area->name,
             'head_pers_id' => $item['head_pers_id'],
-            'address' => $item['latlng'],
+            'head_name' => (($item->person)? $item->person->name:''),
+            'address' => $item['address'],
+            'latlng' => $item['latlng'],
             'bounds' => $item['bounds'],
             'status' => $item['status'],
             'created_at' => date($item['created_at']),

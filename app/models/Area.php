@@ -13,6 +13,20 @@ class Area extends \Eloquent {
     protected $fillable = ['parent_id', 'name', 'type', 'contact_person',
                             'contact_no', 'latlng', 'bounds', 'status', 'recstat'];
 
+    /*
+     * For Self Join
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany('User');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
     /**
      * @return mixed
      */
@@ -21,12 +35,19 @@ class Area extends \Eloquent {
         return $this->hasMany('Infrastructure', 'brgy_area_id');
     }
 
-    public function users()
+    public function household()
     {
-        return $this->belongsToMany('User');
+        return $this->hasMany('Household', 'brgy_area_id');
     }
 
-    /* Query Scopes */
+
+    public static function getAreasForLoggedUser($userId)
+    {
+        $user = User::with('Area')->get()->find($userId);
+        $notAllLevel = true;
+
+        return Area::getAreaAndChildren($user->area, $notAllLevel);
+    }
 
 
 }

@@ -3,11 +3,11 @@
 class DatabaseSeeder extends Seeder {
 
     private $tables = [
-        'areas'
-//        'users',
-//        'infrastructures',
-//        'households',
-//        'persons'
+        'areas',
+        'users',
+        'infrastructures',
+        'households',
+        'persons'
     ];
 	/**
 	 * Run the database seeds.

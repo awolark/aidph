@@ -28,7 +28,8 @@ abstract class Mailer {
     {
         $this->mail->queue($view, $data, function($message) use($user, $subject)
         {
-            $message->to($user->email)->subject($subject);
+            $message->to($user->email)
+                    ->subject($subject);
         });
     }
 

@@ -2,7 +2,9 @@
 
 use Aidph\Helpers\CsvSeederTrait;
 use Faker\Factory as Faker;
-class AreasTableSeeder extends MasterSeeder {
+
+class AreasTableSeeder extends MasterSeeder
+{
 
     use CsvSeederTrait;
 
@@ -11,12 +13,12 @@ class AreasTableSeeder extends MasterSeeder {
     private $csv_file;
 
     public function run()
-	{
+    {
         $this->csv_file = $this->csv_base_path . 'area.csv';
         $csvData = $this->csvData();
 
         $ctr = 0;
-        foreach($csvData as $data) {
+        foreach ( $csvData as $data ) {
             $fakerData = [];
             $areaData = [];
 
@@ -27,10 +29,9 @@ class AreasTableSeeder extends MasterSeeder {
 
             $areaData = array_merge($data, $fakerData);
 
-            if(is_array($areaData)){
+            if ( is_array($areaData) ) {
                 Area::create($areaData);
             }
-            // Log::info(print_r($areaData, true));
         }
 
 //        $this->area_type = Area::$area_type;
@@ -40,7 +41,7 @@ class AreasTableSeeder extends MasterSeeder {
 //		{
 //			Area::create( $this->createSlug() );
 //		}
-	}
+    }
 
     public function csvData()
     {

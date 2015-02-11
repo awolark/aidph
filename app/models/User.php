@@ -10,7 +10,7 @@ class User extends Eloquent implements UserInterface{
 
 	use UserTrait, EventGenerator;
 
-    protected $fillable = array('area_id', 'username', 'password', 'email', 'role');
+    protected $fillable = array('area_id', 'username', 'password', 'email', 'role', 'recstat');
 	/**
 	 * The database table used by the model.
 	 *
@@ -25,22 +25,27 @@ class User extends Eloquent implements UserInterface{
 	 */
 	protected $hidden = array('password');
 
-    public function areas()
+    public function area()
     {
-        return $this->belongsToMany('Area');
+        return $this->belongsTo('Area', 'area_id', 'id');
     }
+//    public function areas()
+//    {
+//        return $this->belongsToMany('Area');
+//    }
 
 
     /**
      * @param $area_id
      * @param $username
+     * @param $password
      * @param $email
      * @param $role
      * @return static
      */
-    public static function register($area_id, $username, $email, $role)
+    public static function register($area_id, $username, $password, $email, $role)
     {
-        $user = new static(compact('area_id', 'username', 'email', 'role'));
+        $user = new static(compact('area_id', 'username', 'password', 'email', 'role'));
 
         //raise an event
         $user->raise(new UserHasCreated($user));

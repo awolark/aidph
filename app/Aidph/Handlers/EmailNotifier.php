@@ -1,6 +1,8 @@
 <?php  namespace Aidph\Handlers; 
 
 use Aidph\Mailers\UserMailer;
+use Aidph\Registration\Events;
+use Aidph\Registration\Events\UserHasCreated;
 use Laracasts\Commander\Events\EventListener;
 
 class EmailNotifier extends EventListener {

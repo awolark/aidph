@@ -14,21 +14,12 @@
 
 App::before(function($request)
 {
-<<<<<<< HEAD
     if (Request::getMethod() == "OPTIONS") {
         $headers = array(
             'Access-Control-Allow-Methods'=> 'POST, GET, OPTIONS, PUT, DELETE',
             'Access-Control-Allow-Headers'=> 'X-Requested-With, content-type',);
         return Response::make('', 200, $headers);
     }
-=======
-//    if ( Request::getMethod() === "OPTIONS" ) {
-//        $headers = array(
-//            'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
-//            'Access-Control-Allow-Headers' => 'X-Requested-With, content-type',);
-//        return Response::make('', 200, $headers);
-//    }
->>>>>>> backup-2-10-15
 });
 
 
@@ -112,14 +103,6 @@ Route::filter('csrf', function()
  */
 Route::filter('access-control', function($route, $request, $response)
 {
-<<<<<<< HEAD
-	$response->headers->set('Access-Control-Allow-Origin', '*');
-	// $response->headers->set('Access-Control-Allow-Credentials', true);
-	// $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-	// $response->headers->set('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
-});
-=======
     $response->headers->set('Access-Control-Allow-Origin', '*');
-    $response->headers->set('Access-Control-Allow-Methods', '*');
 });
->>>>>>> backup-2-10-15
+

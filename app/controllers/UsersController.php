@@ -1,10 +1,27 @@
 <?php
 
+use Aidph\Helpers\UserHelperTrait;
+use Aidph\Helpers\UserQueryHelperTrait;
+use Aidph\Validators\UserValidator;
+use Laracasts\Commander\CommanderTrait;
 use Aidph\Transformers\UserTransformer;
+use Sorskod\Larasponse\Larasponse;
 
 class UsersController extends ApiController {
 
-	/**
+    use CommanderTrait, UserHelperTrait, UserQueryHelperTrait;
+
+    protected $validator;
+
+    function __construct(UserValidator $validator, Larasponse $fractal)
+    {
+        $this->validator = $validator;
+
+        parent::__construct($fractal);
+    }
+
+
+    /**
 	 * Display a listing of the resource.
 	 * GET /users
 	 *
@@ -16,26 +33,11 @@ class UsersController extends ApiController {
 
         $limit = Input::get('limit') ? Input::get('limit') : $this->default_item_limit;
 
-        if ( $limit > $this->default_item_limit ) {
-            $limit = $this->default_item_limit;
-        }
+        if ( $limit > $this->default_item_limit ) { $limit = $this->default_item_limit; }
 
-        $users = User::where('id','!=',$loggedUserId)
-                ->orderBy('recstat','asc')
-                ->paginate($limit);
+        $users = $this->getUsersOfLoggedUser($loggedUserId, $limit);
 
         return $this->respondWithPagination($users, new UserTransformer());
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /users
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
 	}
 
 	/**
@@ -71,13 +73,10 @@ class UsersController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+        Log::info('Delete id: ' . $id);
+        $user = User::findOrFail($id);
+        $user->delete();
 	}
 
-    public function getLoggedUserAreas($id)
-    {
-        $user = DB::select(DB::raw("SELECT "));
-//        Log::info(print_r($user, true));
-    }
 
 }

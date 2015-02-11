@@ -1,6 +1,18 @@
 <?php
 
-class HouseholdsController extends \BaseController {
+use Aidph\Transformers\HouseholdsTransformer;
+use Sorskod\Larasponse\Larasponse;
+
+class HouseholdsController extends ApiController {
+
+    protected $fractal;
+
+    function __construct(Larasponse $fractal)
+    {
+        $this->fractal = $fractal;
+
+//        $this->beforeFilter('auth.basic', ['on' => 'post']);
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -10,13 +22,21 @@ class HouseholdsController extends \BaseController {
 	 */
 	public function index()
 	{
+        $loggedUserId = Input::get('loggedUserId');
+
         $limit = Input::get('limit') ? : $this->default_item_limit;
 
-        if ( $limit > $this->default_item_limit ) {
-            $limit = $this->default_item_limit;
-        }
+        if ( $limit > $this->default_item_limit ) {  $limit = $this->default_item_limit;  }
 
-        $households = Household::paginate($limit);
+        $areaIds = Area::getAreaIdsForUser($loggedUserId, '', true);
+
+        $households = Household::whereIn('brgy_area_id', $areaIds)
+            ->with('area')
+            ->with('person')
+            ->orderBy('recstat', 'asc')
+            ->paginate($limit);
+
+//        $households = Household::paginate($limit);
 
         return $this->respondWithPagination($households, new HouseholdsTransformer());
 	}
